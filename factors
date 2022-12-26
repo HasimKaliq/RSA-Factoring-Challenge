@@ -1,31 +1,20 @@
 #!/usr/bin/python3
 import sys
+"""RSA Factoring Challenge"""
 
+def factorizer(value):
+    if(value > 2):
+        for i in range(2, value):
+            if(value % i == 0):
+                print("{:.0f}={:.0f}*{:.0f}".format(value, value/i, i))
+                break
+try:
+    with open(sys.argv[1]) as file:
+        line = file.readline()
 
-# fn unpack number factorial
-def factors():
-    """
-    function factors to search file to convert number and format n=p*q
-    """
-    try:
-        revfile = sys.argv[1]
-        with open(revfile) as f:
-            for revnumber in f:
-                revnumber = int(revnumber)
-                if revnumber % 2 == 0:
-                        print("{}={}*{}".format(revnumber, revnumber // 2, 2))
-                        continue
-                i = 3
-                while i < revnumber // 2:
-                    if revnumber % i == 0:
-                        print("{}={}*{}".format(revnumber, revnumber // i, i))
-                        break
-                    i = i + 2
-                if i == (revnumber // 2) + 1:
-                    print("{}={}*{}".format(revnumber, revnumber, 1))
-    except (IndexError):
-        pass
-
-
-# autostart
-factors()
+        while line != "":
+            value = int(line.split('\n')[0])
+            factorizer(value)
+            line = file.readline()
+except:
+    pass
